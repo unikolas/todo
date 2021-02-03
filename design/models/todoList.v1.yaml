@@ -1,0 +1,35 @@
+title: todoList
+type: object
+x-examples:
+  example-1:
+    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+    name: string
+    status: 'Created, Archived, Deleted'
+    createdDate: '2019-08-24'
+    todos:
+      - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+        createdDate: '2019-08-24T14:15:22Z'
+        updatedDate: '2019-08-24T14:15:22Z'
+        text: string
+        status: string
+        order: 0
+description: ''
+properties:
+  id:
+    type: string
+    format: uuid
+  name:
+    type: string
+  state:
+    type: string
+    example: 'Created, Archived, Deleted'
+  created_date:
+    type: string
+    format: date
+  todos:
+    type: array
+    items:
+      $ref: ./todo.v1.yaml
+required:
+  - id
+  - name

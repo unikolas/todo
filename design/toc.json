@@ -1,0 +1,27 @@
+{
+  "items": [
+    {
+      "type": "divider",
+      "title": "APIS"
+    },
+    {
+      "type": "item",
+      "title": "Todo list API",
+      "uri": "reference/Todo-list-API.v1.yaml"
+    },
+    {
+      "type": "divider",
+      "title": "Schemas"
+    },
+    {
+      "type": "item",
+      "title": "todo",
+      "uri": "models/todo.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "todoList",
+      "uri": "models/todoList.v1.yaml"
+    }
+  ]
+}

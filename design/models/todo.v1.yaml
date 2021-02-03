@@ -1,0 +1,44 @@
+title: todo
+type: object
+x-examples:
+  example-1:
+    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+    state: created
+    createdDate: '2019-08-24T14:15:22Z'
+    updatedDate: ''
+    status: todo
+    text: Create todo
+    order: 0
+  example-2:
+    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+    state: deleted
+    createdDate: '2019-08-24T14:15:22Z'
+    updatedDate: '2019-08-24T14:15:22Z'
+    status: inProgress
+    text: Create Todo
+    order: 0
+properties:
+  id:
+    type: string
+    format: uuid
+  state:
+    type: string
+    example: 'created, deleted'
+  createdDate:
+    type: string
+    format: date-time
+  updatedDate:
+    type: string
+    format: date-time
+  status:
+    type: string
+    example: 'todo, inProgress, done'
+  title:
+    type: string
+  description:
+    type: string
+required:
+  - id
+  - state
+  - createdDate
+  - status
