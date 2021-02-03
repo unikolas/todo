@@ -16,7 +16,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // Routes
 
-express().get('/', (req, res) => res.render('client/index.js'))
+express()
+    .use(express.static(path.join(__dirname, 'public')))
+    .set('views', path.join(__dirname, 'views'))
+    .set('view engine', 'ejs')
+    .get('/', (req, res) => res.render('client/index.js'))
 
 // app.use(express.static(path.join(__dirname, 'public')))
 // app.set('views', path.join(__dirname, 'views'))
