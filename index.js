@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const path = require('path')
 var bodyParser = require('body-parser')
+
 // const pool = require('./db')
 
 const app = express()
@@ -17,12 +18,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // Routes
 
-express()
-    .use(express.static(path.join(__dirname, 'public')))
-    .set('views', path.join(__dirname, 'views'))
-    .set('view engine', 'ejs')
+app.use(express.static(path.join(__dirname, 'public')))
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'ejs')
 
-app.get('/', (req, res) => res.render('client/index.js'))
+app.get('/', (req, res) => res.render('client/src/index.js'))
 
 // app.use(express.static(path.join(__dirname, 'public')))
 // app.set('views', path.join(__dirname, 'views'))
