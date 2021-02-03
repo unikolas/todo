@@ -1,5 +1,16 @@
 {
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Todo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "unikolas",
+  "license": "ISC",
   "dependencies": {
-    "styled-components": "^5.2.1"
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "pg": "^8.5.1"
   }
 }
