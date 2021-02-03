@@ -18,14 +18,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => res.render('client/index'))
 
-app.get('/', (req, res) => {
-    try {
-        res.json('Welcome home')
-    } catch (err) {
-        console.error(err.message)
-    }
-})
-
 // Create a todo
 
 app.post('/todos', async (req, res) => {
