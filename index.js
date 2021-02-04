@@ -6,6 +6,7 @@ var bodyParser = require('body-parser')
 
 const app = express()
 const PORT = process.env.PORT || 5000
+const buildPath = 'client/build'
 
 // Middleware
 
@@ -23,15 +24,14 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // Core
 
 if (process.env.NODE_ENV === 'production') {
-    const publicPath = path.join(__dirname, 'client/build')
-    app.use(express.static('client/build'))
+    app.use(express.static(path.join(__dirname, buildPath)))
     app.get('/', (req, res) =>
-        res.sendFile(path.join(publicPath, 'index.html'))
+        res.sendFile(path.join(__dirname, buildPath, 'index.html'))
     )
 
     console.log('Prod, ', PORT, ', ', path.join(__dirname))
 } else {
-    app.use(express.static('client/build'))
+    app.use(express.static(buildPath))
     console.log('Dev, ', PORT, ', ', path.join(__dirname))
 }
 
