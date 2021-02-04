@@ -7,7 +7,7 @@
     "node": "14.x"
   },
   "scripts": {
-    "start": "nodemon index & (cd client && npm start)",
+    "start": "(cd client && npm start) & nodemon index",
     "makebuild": "cd client && npm run build"
   },
   "author": "unikolas",
