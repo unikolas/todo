@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "nodemon index & (cd client && npm start)",
-    "dev": "cd client && npm run build"
+    "prod": "cd client && npm run build"
   },
   "author": "unikolas",
   "license": "ISC",
