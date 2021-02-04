@@ -11,14 +11,23 @@ const PORT = process.env.PORT || 5000
 
 app.use(cors())
 app.use(express.json())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+// Environment paths
+
+if (process.env.NODE_ENV === 'production') {
+    const publicPath = path.join(__dirname, 'client/build')
+    app.use(express.static(publicPath))
+    app.get('/', (req, res) => {
+        res.sendFile(path.join(publicPath, 'index.html'))
+    })
+    console.log('Env: Prod, Port: ', PORT, ', Path:', path.join(__dirname))
+} else {
+    console.log('Env: Local, Port: ', PORT, ', Path:', path.join(__dirname))
+}
 
 // Routes
-
-const publicPath = path.join(__dirname, 'client/build')
-app.use(express.static(publicPath))
-app.get('*', (req, res) => {
-    res.sendFile(path.join(publicPath, 'index.html'))
-})
 
 // Create a todo
 
