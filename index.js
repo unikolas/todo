@@ -14,7 +14,7 @@ app.use(express.json())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-// Environment paths
+// Environment and basic routing
 
 if (process.env.NODE_ENV === 'production') {
     const publicPath = path.join(__dirname, 'client/build')
@@ -24,6 +24,10 @@ if (process.env.NODE_ENV === 'production') {
     })
     console.log('Env: Prod, Port: ', PORT, ', Path:', path.join(__dirname))
 } else {
+    app.use(express.static('client/build'))
+    // app.get('/', (req, res) => {
+    //     res.send('This is from express.js')
+    // })
     console.log('Env: Local, Port: ', PORT, ', Path:', path.join(__dirname))
 }
 

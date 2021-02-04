@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "Todo",
   "main": "index.js",
-  "start": "node index.js",
   "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
   "engines": {
     "node": "14.x"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index & (cd client && npm start)",
+    "build": "cd client && npm run build"
   },
   "author": "unikolas",
   "license": "ISC",
@@ -18,5 +18,8 @@
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "pg": "^8.5.1"
+  },
+  "devDependencies": {
+    "concurrently": "^4.0.1"
   }
 }

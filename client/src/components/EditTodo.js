@@ -13,7 +13,7 @@ const EditTodo = ({ todo }) => {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(body),
                 })
-                // setDescription('')
+                setDescription('')
                 window.location = '/'
             } catch (err) {
                 console.log(err.message)
