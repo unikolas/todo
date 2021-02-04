@@ -1,0 +1,10 @@
+{
+    "launch": {
+
+        "configurations": [],
+        "compounds": []
+    },
+    // "editor.rulers": [120],
+    // "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 120,
+}
