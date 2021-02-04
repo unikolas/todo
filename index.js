@@ -17,23 +17,25 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // Routing
 
 // app.get('/', (req, res) => {
-//     res.status(200).send('Hello World!')
+//     res.status(200).send('Hello Cruel World!')
 // })
+
+// Core
 
 if (process.env.NODE_ENV === 'production') {
     const publicPath = path.join(__dirname, 'client/build')
-    // app.use(express.static(publicPath))
-    // app.get('/', (req, res) => {
-    //     res.sendFile(path.join(publicPath, 'index.html'))
-    // })
-    app.get('/', (req, res) => {
-        res.status(200).send('Hello Cruel World!')
-    })
+
+    app.get('/', (req, res) =>
+        res.sendFile(path.join(publicPath, 'index.html'))
+    )
+
     console.log('Prod, ', PORT, ', ', path.join(__dirname))
 } else {
     app.use(express.static('client/build'))
     console.log('Dev, ', PORT, ', ', path.join(__dirname))
 }
+
+// API
 
 // Listen... We need to talk...
 
