@@ -1,9 +1,8 @@
 const express = require('express')
 const cors = require('cors')
 const path = require('path')
-var bodyParser = require('body-parser')
 const pool = require('./db')
-const { response } = require('express')
+var bodyParser = require('body-parser')
 
 const app = express()
 const PORT = process.env.PORT || 5000
@@ -12,14 +11,13 @@ const PORT = process.env.PORT || 5000
 
 app.use(cors())
 app.use(express.json())
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
 
 // Routes
 
-app.use(express.static(path.join(__dirname, 'client/build')))
+const publicPath = path.join(__dirname, 'client/build')
+app.use(express.static(publicPath))
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/client/build/index.html'))
+    res.sendFile(path.join(publicPath, 'index.html'))
 })
 
 // Create a todo
@@ -27,7 +25,6 @@ app.get('*', (req, res) => {
 app.post('/todos', async (req, res) => {
     try {
         const { description } = req.body
-        console.log('POSTSH')
         const newTodo = await pool.query(
             'INSERT INTO todo (description) VALUES($1) RETURNING *',
             [description]

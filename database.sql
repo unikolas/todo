@@ -17,7 +17,7 @@ CREATE TABLE todo (
 );
 
 CREATE
-OR REPLACE FUNCTION trigger_set_timestamp() RETURNS TRIGGER AS $ $ BEGIN NEW.updated_at = NOW();
+OR REPLACE FUNCTION trigger_set_timestamp() RETURNS TRIGGER AS $ $ BEGIN NEW.updated_date = NOW();
 
 RETURN NEW;
 
@@ -25,4 +25,9 @@ END;
 
 CREATE TRIGGER set_timestamp BEFORE
 UPDATE
-    ON todos FOR EACH ROW EXECUTE PROCEDURE trigger_set_timestamp();
+    ON todo FOR EACH ROW EXECUTE PROCEDURE trigger_set_timestamp();
+
+INSERT INTO
+    todo ("title")
+VALUES
+    ("title");
