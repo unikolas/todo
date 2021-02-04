@@ -16,13 +16,13 @@ app.use(express.json())
 
 const publicPath = path.join(__dirname, 'client/build')
 app.use(express.static(publicPath))
-app.get('*', (req, res) => {
-    res.sendFile(path.join(publicPath, 'index.html'))
-})
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(publicPath, 'index.html'))
+// })
 
 // Create a todo
 
-app.post('/todos', async (req, res) => {
+app.post('/api/todos', async (req, res) => {
     try {
         const { description } = req.body
         const newTodo = await pool.query(
@@ -37,7 +37,7 @@ app.post('/todos', async (req, res) => {
 
 // Get all todos
 
-app.get('/todos', async (req, res) => {
+app.get('/api/todos', async (req, res) => {
     try {
         const allTodos = await pool.query('SELECT * FROM todo')
         res.json(allTodos.rows)
@@ -48,7 +48,7 @@ app.get('/todos', async (req, res) => {
 
 // Get a todo
 
-app.get('/todos/:id', async (req, res) => {
+app.get('/api/todos/:id', async (req, res) => {
     try {
         const { id } = req.params
         const todo = await pool.query('SELECT * FROM todo WHERE id = $1', [id])
@@ -60,7 +60,7 @@ app.get('/todos/:id', async (req, res) => {
 
 // Update a todo
 
-app.put('/todos/:id', async (req, res) => {
+app.put('/api/todos/:id', async (req, res) => {
     try {
         const { id } = req.params
         const { description } = req.body
@@ -76,7 +76,7 @@ app.put('/todos/:id', async (req, res) => {
 
 // Delete a todo
 
-app.delete('/todos/:id', async (req, res) => {
+app.delete('/api/todos/:id', async (req, res) => {
     try {
         const { id } = req.params
         const deleteTodo = await pool.query('DELETE FROM todo WHERE id = $1', [

@@ -8,7 +8,7 @@ const EditTodo = ({ todo }) => {
         if (description !== '') {
             try {
                 const body = { description }
-                await fetch(`http://localhost:5000/todos/${todo.id}`, {
+                await fetch(`/api/todos/${todo.id}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(body),

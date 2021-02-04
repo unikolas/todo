@@ -5,9 +5,8 @@ const ListTodos = () => {
     const [todos, setTodos] = useState([])
     const getTodos = async () => {
         try {
-            const response = await fetch('/todos')
+            const response = await fetch('/api/todos')
             const jsonData = await response.json()
-            console.log(jsonData)
             setTodos(jsonData.reverse())
         } catch (err) {
             console.log(err.message)
@@ -20,7 +19,7 @@ const ListTodos = () => {
 
     const deleteTodo = async (id) => {
         try {
-            await fetch(`/todos/${id}`, {
+            await fetch(`/api/todos/${id}`, {
                 method: 'DELETE',
             })
             setTodos(todos.filter((todo) => todo.id !== id))

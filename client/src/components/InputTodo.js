@@ -12,7 +12,7 @@ const InputTodo = () => {
             try {
                 const body = { description }
                 setIsSending(true)
-                await fetch('/todos', {
+                await fetch('/api/todos', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(body),
