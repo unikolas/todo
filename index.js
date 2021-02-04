@@ -25,10 +25,10 @@ if (process.env.NODE_ENV === 'production') {
     app.get('/', (req, res) => {
         res.send('This is from express.js')
     })
-    console.log('Env: Prod, Port: ', PORT, ', Path:', path.join(__dirname))
+    console.log('Prod, ', PORT, ', ', path.join(__dirname))
 } else {
     app.use(express.static('client/build'))
-    console.log('Env: Local, Port: ', PORT, ', Path:', path.join(__dirname))
+    console.log('Dev, ', PORT, ', ', path.join(__dirname))
 }
 
 // Routes
