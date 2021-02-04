@@ -19,15 +19,15 @@ app.use(bodyParser.urlencoded({ extended: true }))
 if (process.env.NODE_ENV === 'production') {
     const publicPath = path.join(__dirname, 'client/build')
     app.use(express.static(publicPath))
+    // app.get('/', (req, res) => {
+    //     res.sendFile(path.join(publicPath, 'index.html'))
+    // })
     app.get('/', (req, res) => {
-        res.sendFile(path.join(publicPath, 'index.html'))
+        res.send('This is from express.js')
     })
     console.log('Env: Prod, Port: ', PORT, ', Path:', path.join(__dirname))
 } else {
     app.use(express.static('client/build'))
-    // app.get('/', (req, res) => {
-    //     res.send('This is from express.js')
-    // })
     console.log('Env: Local, Port: ', PORT, ', Path:', path.join(__dirname))
 }
 
