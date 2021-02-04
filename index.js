@@ -2,7 +2,8 @@ const express = require('express')
 const cors = require('cors')
 const path = require('path')
 var bodyParser = require('body-parser')
-// const pool = require('./db')
+const pool = require('./db')
+const { response } = require('express')
 
 const app = express()
 const PORT = process.env.PORT || 5000
@@ -26,6 +27,7 @@ app.get('*', (req, res) => {
 app.post('/todos', async (req, res) => {
     try {
         const { description } = req.body
+        console.log('POSTSH')
         const newTodo = await pool.query(
             'INSERT INTO todo (description) VALUES($1) RETURNING *',
             [description]
