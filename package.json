@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "nodemon index & (cd client && npm start)",
-    "make build": "cd client && npm run build"
+    "makebuild": "cd client && npm run build"
   },
   "author": "unikolas",
   "license": "ISC",
