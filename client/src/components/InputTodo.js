@@ -1,4 +1,6 @@
 import React, { Fragment, useState } from 'react'
+import Button from './Button'
+import Input from './Input'
 
 const InputTodo = () => {
     const [description, setDescription] = useState('')
@@ -29,16 +31,14 @@ const InputTodo = () => {
     return (
         <Fragment>
             <form className='d-flex gap-3 mt-4' onSubmit={onSubmit}>
-                <input
-                    className='form-control '
+                <Input
                     type='text'
                     value={description}
                     onChange={handleChange}
+                    placeholder="What's on?"
                     autoFocus
                 />
-                <button className='btn btn-success' onClick={onSubmit}>
-                    {isSending ? 'Adding...' : 'Add'}
-                </button>
+                <Button onClick={onSubmit}>Add</Button>
             </form>
         </Fragment>
     )

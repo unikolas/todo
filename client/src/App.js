@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import InputTodo from './components/InputTodo'
 import ListTodos from './components/ListTodos'
+import Wrapper from './components/Wrapper'
 
 function App() {
     return (
@@ -15,16 +16,10 @@ function App() {
                 >
                     Todo
                 </h1>
-                <div
-                    style={{
-                        maxWidth: 600,
-                        padding: '0vh 5vw',
-                        margin: '0 auto',
-                    }}
-                >
+                <Wrapper>
                     <InputTodo />
                     <ListTodos />
-                </div>
+                </Wrapper>
             </Fragment>
         </div>
     )
