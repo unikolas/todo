@@ -16,12 +16,7 @@ const ui = {
         primary: '#0666EB',
         accent: '#F7930D',
     },
-    text: {
-        h1: '33px/48px',
-        primary: '17px/24px',
-        secondary: '15px/20px',
-        caption: '13px/18px',
-    },
+    breakpoints: {},
 }
 
 export default ui

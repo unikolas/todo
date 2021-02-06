@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import EditTodo from './EditTodo'
+import Todo from './Todo'
 
 const ListTodos = () => {
     const [todos, setTodos] = useState([])
@@ -28,34 +29,32 @@ const ListTodos = () => {
         }
     }
 
+    const todoItems = todos.map((todo) => {
+        return (
+            <Todo
+                key={todo.id}
+                todo={todo}
+                onDeleteClick={() => deleteTodo(todo.id)}
+            />
+        )
+    })
+
     return (
-        <Fragment>
-            <table className='table mt-4'>
-                <thead>
-                    <tr>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {todos.map((todo) => (
-                        <tr key={todo.id}>
-                            <td className='d-flex gap-3 align-items-center'>
-                                <span className='flex-fill fs-6'>
-                                    {todo.description}
-                                </span>
-                                <EditTodo todo={todo} />
-                                <button
-                                    className='btn btn-sm btn-outline-danger'
-                                    onClick={() => deleteTodo(todo.id)}
-                                >
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </Fragment>
+        <div
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+            }}
+        >
+            {todoItems}
+
+            {/* <EditTodo todo={todo} />
+            <button
+                className='btn btn-sm btn-outline-danger'
+                onClick={() => deleteTodo(todo.id)}
+            >
+             */}
+        </div>
     )
 }
 

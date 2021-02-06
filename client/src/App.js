@@ -2,26 +2,20 @@ import React, { Fragment } from 'react'
 import InputTodo from './components/InputTodo'
 import ListTodos from './components/ListTodos'
 import Wrapper from './components/Wrapper'
+import Header from './components/Header'
+import colors from './constants/colors'
 
 function App() {
     return (
-        <div>
-            <Fragment>
-                <h1
-                    style={{
-                        padding: '5vh 5vw 2vh',
-                        fontWeight: 700,
-                        color: '#8899B8',
-                    }}
-                >
-                    Todo
-                </h1>
-                <Wrapper>
+        <Fragment>
+            <Wrapper>
+                <Header color={colors.grey35}>Todo</Header>
+                <Wrapper variant='main'>
                     <InputTodo />
                     <ListTodos />
                 </Wrapper>
-            </Fragment>
-        </div>
+            </Wrapper>
+        </Fragment>
     )
 }
 
