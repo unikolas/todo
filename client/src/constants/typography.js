@@ -1,8 +1,8 @@
 import { css } from 'styled-components'
 
 const FONTS = {
-    DEFAULT_FONT: `-apple-system, Roboto, Helvetica, Arial, sans-serif`,
-    HEADING_FONT: `-apple-system, Roboto, Helvetica, Arial, sans-serif`,
+    DEFAULT_FONT: `'Work Sans', -apple-system, Roboto, Helvetica, Arial, sans-serif`,
+    HEADING_FONT: `'Work Sans', -apple-system, Roboto, Helvetica, Arial, sans-serif`,
 }
 
 const DEFAULT_TEXT_STYLE = {
@@ -36,7 +36,7 @@ const typography = {
     header: {
         h1: css`
             font-family: ${FONTS.HEADING_FONT};
-            font-weight: 700;
+            font-weight: 800;
             font-size: 43px;
             line-height: 52px;
             letter-spacing: -0.025em;

@@ -6,7 +6,7 @@ const Header = styled.h1`
     ${(props) =>
         props.variant
             ? typography.header[props.variant]
-            : typography.header.h2};
+            : typography.header.h1};
     color: ${(props) => props.color};
     margin: 0;
     padding-bottom: 40px;
