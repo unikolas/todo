@@ -2,8 +2,11 @@ import React, { Fragment, useEffect, useState } from 'react'
 import EditTodo from './EditTodo'
 import Todo from './Todo'
 
+import todoMeth from '../methods/todoMeth'
+
 const ListTodos = () => {
     const [todos, setTodos] = useState([])
+
     const getTodos = async () => {
         try {
             const response = await fetch('/api/todos')
@@ -18,21 +21,13 @@ const ListTodos = () => {
         getTodos()
     }, [])
 
-    const deleteTodo = async (id) => {
-        try {
-            await fetch(`/api/todos/${id}`, {
-                method: 'DELETE',
-            })
-            setTodos(todos.filter((todo) => todo.id !== id))
-        } catch (err) {
-            console.log(err.message)
-        }
+    const handleDeleteClick = (todo) => {
+        todoMeth.delete(todo)
+        setTodos(todos.filter((item) => item.id !== todo.id))
     }
 
-    // Complete todo // TODO: Add complete todo function and endpoint
-
-    const completeTodo = (todo) => {
-        console.log('Complete todo function ', todo.id)
+    const handleCheckClick = (todo) => {
+        todoMeth.updateStatus(todo)
     }
 
     const todoItems = todos.map((todo) => {
@@ -40,8 +35,8 @@ const ListTodos = () => {
             <Todo
                 key={todo.id}
                 todo={todo}
-                handleDeleteClick={() => deleteTodo(todo.id)}
-                onCheck={() => completeTodo(todo)}
+                onDelete={() => handleDeleteClick(todo)}
+                onCheck={() => handleCheckClick(todo)}
             />
         )
     })

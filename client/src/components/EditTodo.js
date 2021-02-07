@@ -23,12 +23,7 @@ const EditTodo = ({ todo }) => {
 
     return (
         <Fragment>
-            <button
-                className='btn btn-sm btn-outline-secondary'
-                type='button'
-                data-bs-toggle='modal'
-                data-bs-target={`#id${todo.id}`}
-            >
+            <button data-bs-toggle='modal' data-bs-target={`#id${todo.id}`}>
                 Edit
             </button>
 

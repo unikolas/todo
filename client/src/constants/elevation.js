@@ -19,9 +19,10 @@ const elevation = {
     },
 }
 
-function getElevation(elev = 'e100', { hover } = false) {
+function getElevation(elev = 'e100', hover = false) {
     return css`
         box-shadow: ${!hover ? elevation[elev].default : elevation[elev].hover};
+        transition: box-shadow 150ms cubic-bezier(0.25, 0.75, 0.5, 1);
     `
 }
 

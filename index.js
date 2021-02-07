@@ -86,6 +86,22 @@ app.put('/api/todos/:id', async (req, res) => {
     }
 })
 
+// Update a todo status
+
+app.put('/api/todos/:id/update-status', async (req, res) => {
+    try {
+        const { id } = req.params
+        const { status } = req.body
+        await pool.query('UPDATE todo SET status = $1 WHERE id = $2', [
+            status,
+            id,
+        ])
+        res.json(`Todo status was updated to ${status}`)
+    } catch (err) {
+        console.log(err.message)
+    }
+})
+
 // Delete a todo
 
 app.delete('/api/todos/:id', async (req, res) => {
