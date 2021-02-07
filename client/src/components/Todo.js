@@ -1,27 +1,47 @@
 import React, { useState } from 'react'
 import Styled from 'styled-components'
-import Icon from './Icon'
+
 import ui from '../constants/constants'
 import font from '../constants/typography'
 import colors from '../constants/colors'
 
+import Icon from './Icon'
+import Checkbox from './Checkbox'
+
 const Todo = (props) => {
     const [isHovered, setHovered] = useState(false)
+
+    const handleTodoClick = (e) => {
+        console.log('handle Todo Click')
+    }
+
+    const handleCheckClick = (e) => {
+        e.stopPropagation()
+        props.onCheck
+            ? props.onCheck()
+            : console.log('You forgot to pass onClick function to Todo Check')
+    }
+
+    const handleDeleteClick = (e) => {
+        e.stopPropagation()
+        console.log('handle Delete Click')
+    }
+
     return (
         <div
             className={props.className}
             style={{ display: 'flex' }}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
-            // onClick={() => console.log('Todo click')}
+            onClick={(e) => handleTodoClick(e)}
         >
-            <Icon
-                name={props.completed ? 'check_box' : 'check_box_outline_blank'}
-                size={'sm'}
-                color={colors.grey90}
-                style={{ padding: '2px 8px 2px 0' }}
+            <Checkbox
+                m={'2px 10px 2px 0'}
+                isCompleted={props.isCompleted}
+                isParentHovered={isHovered}
+                onClick={(e) => handleCheckClick(e)}
             />
-            <span>{props.todo.description}</span>
+            <span style={{ flexGrow: 1 }}>{props.todo.description}</span>
             <Icon
                 name='delete'
                 size={'sm'}
@@ -32,7 +52,7 @@ const Todo = (props) => {
                     padding: '2px 0',
                     opacity: isHovered ? 1 : 0,
                 }}
-                onClick={() => console.log('Delete')}
+                onClick={(e) => handleDeleteClick(e)}
             />
         </div>
     )

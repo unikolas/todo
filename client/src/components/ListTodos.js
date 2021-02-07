@@ -29,12 +29,19 @@ const ListTodos = () => {
         }
     }
 
+    // Complete todo // TODO: Add complete todo function and endpoint
+
+    const completeTodo = (todo) => {
+        console.log('Complete todo function ', todo.id)
+    }
+
     const todoItems = todos.map((todo) => {
         return (
             <Todo
                 key={todo.id}
                 todo={todo}
                 onDeleteClick={() => deleteTodo(todo.id)}
+                onCheck={() => completeTodo(todo)}
             />
         )
     })

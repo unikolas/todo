@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Color from 'color'
+import colors from '../constants/colors'
 import ui from '../constants/constants'
 import font from '../constants/typography'
 
@@ -16,7 +16,7 @@ const Input = styled.input`
     outline: none;
     transition: all 0.15s ease-in;
     ::placeholder {
-        color: ${ui.color.grey};
+        color: ${colors.grey50};
     }
     :focus {
         background-color: white;

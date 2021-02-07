@@ -39,7 +39,7 @@ const Icon = (props) => {
     }
 
     return (
-        <motion.span className={'material-icons'} style={style}>
+        <motion.span {...props} className={'material-icons'} style={style}>
             {props.name}
         </motion.span>
     )

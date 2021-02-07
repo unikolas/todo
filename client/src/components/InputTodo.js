@@ -31,9 +31,9 @@ const InputTodo = () => {
                     type='text'
                     value={description}
                     placeholder="What's on?"
-                    autoFocus
                     style={{ marginBottom: 8 }}
                     onChange={handleChange}
+                    autoFocus
                 />
             </form>
         </div>
