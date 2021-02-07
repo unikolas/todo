@@ -19,12 +19,12 @@ const Todo = (props) => {
         e.stopPropagation()
         props.onCheck
             ? props.onCheck()
-            : console.log('You forgot to pass onClick function to Todo Check')
+            : console.log('You forgot to pass onClick from Todo to Todo Check')
     }
 
     const handleDeleteClick = (e) => {
         e.stopPropagation()
-        console.log('handle Delete Click')
+        props.handleDeleteClick()
     }
 
     return (

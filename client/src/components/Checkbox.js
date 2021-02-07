@@ -19,7 +19,7 @@ const Checkbox = (props) => {
         width: '100%',
         height: '100%',
         borderRadius: 5,
-        border: `4px solid ${colors.grey95}`,
+        border: `3px solid ${colors.grey95}`,
     }
 
     const checkContainerStyles = {
@@ -38,8 +38,8 @@ const Checkbox = (props) => {
             height: 4,
         },
         empty: {
-            width: 20,
-            height: 20,
+            width: 18,
+            height: 18,
         },
         emptyHover: { borderColor: colors.grey80 },
         checked: { borderWidth: 0, backgroundColor: colors.primary },

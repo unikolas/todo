@@ -40,7 +40,7 @@ const ListTodos = () => {
             <Todo
                 key={todo.id}
                 todo={todo}
-                onDeleteClick={() => deleteTodo(todo.id)}
+                handleDeleteClick={() => deleteTodo(todo.id)}
                 onCheck={() => completeTodo(todo)}
             />
         )
@@ -56,10 +56,6 @@ const ListTodos = () => {
             {todoItems}
 
             {/* <EditTodo todo={todo} />
-            <button
-                className='btn btn-sm btn-outline-danger'
-                onClick={() => deleteTodo(todo.id)}
-            >
              */}
         </div>
     )
