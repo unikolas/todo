@@ -7,7 +7,7 @@ import Icon from './Icon'
 const Checkbox = (props) => {
     const [isChecked, setIsChecked] = useState(props.isChecked || false)
 
-    const onCheckClick = (e) => {
+    const handleClick = (e) => {
         e.stopPropagation()
         props.onClick
             ? props.onClick(e)
@@ -63,7 +63,7 @@ const Checkbox = (props) => {
                 whileHover='emptyHover'
                 animate={props.isParentHovered ? 'empty' : 'initial'}
                 transition={spring}
-                onClick={(e) => onCheckClick(e)}
+                onClick={(e) => handleClick(e)}
             >
                 <Icon name='check' size={'xs'} color={colors.white} />
                 {/* <input type='checkbox' /> */}

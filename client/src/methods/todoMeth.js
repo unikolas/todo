@@ -1,5 +1,15 @@
 const todo = {}
 
+todo.getAll = async () => {
+    try {
+        const response = await fetch('/api/todos')
+        const jsonData = await response.json()
+        return jsonData
+    } catch (err) {
+        console.log(err.message)
+    }
+}
+
 todo.delete = async (todo) => {
     try {
         await fetch(`/api/todos/${todo.id}`, {

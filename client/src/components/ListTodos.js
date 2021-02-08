@@ -7,14 +7,19 @@ import todoMeth from '../methods/todoMeth'
 const ListTodos = () => {
     const [todos, setTodos] = useState([])
 
+    // const getTodos = async () => {
+    //     try {
+    //         const response = await fetch('/api/todos')
+    //         const jsonData = await response.json()
+    //         setTodos(jsonData.reverse())
+    //     } catch (err) {
+    //         console.log(err.message)
+    //     }
+    // }
+
     const getTodos = async () => {
-        try {
-            const response = await fetch('/api/todos')
-            const jsonData = await response.json()
-            setTodos(jsonData.reverse())
-        } catch (err) {
-            console.log(err.message)
-        }
+        const todos = await todoMeth.getAll()
+        setTodos(todos.reverse())
     }
 
     useEffect(() => {

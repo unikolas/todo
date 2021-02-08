@@ -51,7 +51,9 @@ app.post('/api/todos', async (req, res) => {
 
 app.get('/api/todos', async (req, res) => {
     try {
-        const allTodos = await pool.query('SELECT * FROM todo')
+        const allTodos = await pool.query(
+            'SELECT * FROM todo ORDER BY status asc, updated_date asc'
+        )
         res.json(allTodos.rows)
     } catch (err) {
         console.error(err.message)
