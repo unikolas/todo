@@ -9,9 +9,12 @@ import todoConst from '../constants/todoConst'
 
 import Icon from './Icon'
 import Checkbox from './Checkbox'
+import todo from '../methods/todoMeth'
 
 const Todo = (props) => {
     const [isHovered, setHovered] = useState(false)
+    const isCompleted =
+        props.todo.status === todoConst.status.completed ? true : false
 
     // Handlers
 
@@ -52,8 +55,6 @@ const Todo = (props) => {
 
     // Return
 
-    console.log(props.todo.status)
-
     return (
         <div
             className={props.className}
@@ -64,16 +65,14 @@ const Todo = (props) => {
         >
             <Checkbox
                 m={'2px 10px 2px 0'}
-                todoStatus={props.todo.status}
+                isChecked={isCompleted ? true : false}
                 isParentHovered={isHovered}
                 onClick={(e) => handleCheckClick(e)}
             />
             <span
                 style={
                     titleStyles.default &&
-                    (props.todo.status === todoConst.status.completed
-                        ? titleStyles.completed
-                        : null)
+                    (isCompleted ? titleStyles.completed : null)
                 }
             >
                 {props.todo.description}
@@ -94,7 +93,8 @@ const StyledTodo = Styled(Todo)`
     cursor: pointer;
     width: ${(props) => props.w || '100%'};
     ${font.text.primary};
-    background-color: white;
+    background: ${(props) =>
+        props.todo.status === 'completed' ? colors.grey100 : colors.white};
     border-radius: ${ui.radius.md};
     padding: 12px 12px;
     margin-bottom: 8px;
@@ -105,6 +105,7 @@ const StyledTodo = Styled(Todo)`
     @media (min-width: 640px) {
         :hover{
             z-index: 2;
+            background: ${colors.white};
             ${elevation('e600')}
         }
     }

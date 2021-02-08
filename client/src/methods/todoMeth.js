@@ -29,7 +29,6 @@ todo.updateStatus = async (todo) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
         })
-        window.location = '/'
     } catch (err) {
         console.log(err.message)
     }

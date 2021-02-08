@@ -5,8 +5,6 @@ import colors from '../constants/colors'
 import Icon from './Icon'
 
 const Checkbox = (props) => {
-    const [isChecked, setIsChecked] = useState(props.isChecked || false)
-
     const handleClick = (e) => {
         e.stopPropagation()
         props.onClick
@@ -20,6 +18,10 @@ const Checkbox = (props) => {
         height: '100%',
         borderRadius: 5,
         border: `3px solid ${colors.grey95}`,
+    }
+
+    const checkStylesHover = {
+        background: '#ccc',
     }
 
     const checkContainerStyles = {
@@ -55,7 +57,6 @@ const Checkbox = (props) => {
     return (
         <div style={checkContainerStyles}>
             <motion.div
-                // type='checkbox'
                 style={checkStyles}
                 className={props.className}
                 variants={variants}
@@ -65,8 +66,9 @@ const Checkbox = (props) => {
                 transition={spring}
                 onClick={(e) => handleClick(e)}
             >
-                <Icon name='check' size={'xs'} color={colors.white} />
-                {/* <input type='checkbox' /> */}
+                {props.isChecked && (
+                    <Icon name='check' size={'xs'} color={colors.white} />
+                )}
             </motion.div>
         </div>
     )

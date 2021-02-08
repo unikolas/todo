@@ -7,19 +7,9 @@ import todoMeth from '../methods/todoMeth'
 const ListTodos = () => {
     const [todos, setTodos] = useState([])
 
-    // const getTodos = async () => {
-    //     try {
-    //         const response = await fetch('/api/todos')
-    //         const jsonData = await response.json()
-    //         setTodos(jsonData.reverse())
-    //     } catch (err) {
-    //         console.log(err.message)
-    //     }
-    // }
-
     const getTodos = async () => {
         const todos = await todoMeth.getAll()
-        setTodos(todos.reverse())
+        setTodos(todos)
     }
 
     useEffect(() => {
@@ -31,9 +21,13 @@ const ListTodos = () => {
         setTodos(todos.filter((item) => item.id !== todo.id))
     }
 
-    const handleCheckClick = (todo) => {
-        todoMeth.updateStatus(todo)
+    const handleCheckClick = async (todo) => {
+        await todoMeth.updateStatus(todo)
+        const todos = await todoMeth.getAll()
+        setTodos(todos)
     }
+
+    // <EditTodo todo={todo} />
 
     const todoItems = todos.map((todo) => {
         return (
@@ -54,9 +48,6 @@ const ListTodos = () => {
             }}
         >
             {todoItems}
-
-            {/* <EditTodo todo={todo} />
-             */}
         </div>
     )
 }
