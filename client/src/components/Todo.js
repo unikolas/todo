@@ -105,7 +105,6 @@ const StyledTodo = Styled(Todo)`
     @media (min-width: 640px) {
         :hover{
             z-index: 2;
-            background: ${colors.white};
             ${elevation('e600')}
         }
     }
