@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Input from './Input'
 
-const InputTodo = (props) => {
+const AddTodo = (props) => {
     const [description, setDescription] = useState('')
 
     const handleChange = (e) => setDescription(e.target.value)
@@ -41,4 +41,4 @@ const InputTodo = (props) => {
     )
 }
 
-export default InputTodo
+export default AddTodo

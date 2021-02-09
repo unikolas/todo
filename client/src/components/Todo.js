@@ -19,7 +19,7 @@ const StyledTodo = Styled(motion.div)`
     cursor: pointer;
     ${font.text.primary};
     background: ${(props) =>
-        props.isCompleted ? colors.grey100 : colors.white};
+        props.isCompleted ? 'transparent' : colors.white};
     border-radius: ${ui.radius.md};
     padding: 12px 12px;
     margin-bottom: 8px;

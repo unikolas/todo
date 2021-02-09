@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import InputTodo from './components/InputTodo'
+import AddTodo from './components/AddTodo'
 import ListTodos from './components/ListTodos'
 import Wrapper from './components/Wrapper'
 import Header from './components/Header'
@@ -18,7 +18,7 @@ const App = () => {
         <Wrapper>
             <Header color={colors.grey35}>Todo</Header>
             <Wrapper variant='main'>
-                <InputTodo getTodos={() => getTodos()} />
+                <AddTodo getTodos={() => getTodos()} />
                 <ListTodos getTodos={() => getTodos()} todos={todos} />
             </Wrapper>
         </Wrapper>

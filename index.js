@@ -36,10 +36,14 @@ if (process.env.NODE_ENV === 'production') {
 
 app.post('/api/todos', async (req, res) => {
     try {
-        const { description } = req.body
+        const todo = {
+            title: req.body.title,
+            description: req.body.description,
+            status: req.body.status ? req.body.status : 'todo',
+        }
         const newTodo = await pool.query(
-            'INSERT INTO todo (description) VALUES($1) RETURNING *',
-            [description]
+            'INSERT INTO todo (title, description, status) VALUES($1, $2, $3) RETURNING *',
+            [todo.title, todo.description, todo.status]
         )
         res.json(newTodo.rows[0])
     } catch (err) {
