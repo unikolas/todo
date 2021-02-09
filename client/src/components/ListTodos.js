@@ -13,22 +13,23 @@ const StyledList = Styled.div`
 
 const ListTodos = (props) => {
     const todos = props.todos
-    const [isChecking, setChecking] = useState(false)
+    const getTodos = props.getTodos
+    const [isChecking, setIsChecking] = useState(false)
 
     useEffect(() => {
-        props.getTodos()
+        getTodos()
     }, [])
 
-    const handleDeleteClick = (todo) => {
-        todoMeth.delete(todo)
-        props.getTodos()
+    const handleDeleteClick = async (todo) => {
+        await todoMeth.delete(todo)
+        getTodos()
     }
 
     const handleCheckClick = async (todo) => {
-        setChecking(true)
+        setIsChecking(true)
         await todoMeth.updateStatus(todo)
-        await props.getTodos()
-        setChecking(false)
+        getTodos()
+        setIsChecking(false)
     }
 
     // <EditTodo todo={todo} />
