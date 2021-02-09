@@ -25,6 +25,7 @@ const StyledTodo = Styled(motion.div)`
     margin-bottom: 8px;
     vertical-align: top;
     z-index: 1;
+    opacity: ${(props) => (props.isChecking ? 0.8 : 1)};
     ${media.md(css`
         :hover {
             z-index: 2;
@@ -79,14 +80,14 @@ const Todo = (props) => {
     return (
         <StyledTodo
             isCompleted={isCompleted}
+            isChecking={props.isChecking}
             onClick={(e) => handleTodoClick(e)}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
         >
             <Checkbox
-                isChecked={isCompleted}
                 m={'2px 10px 2px 0'}
-                isParentHovered={isHovered}
+                isChecked={isCompleted}
                 onClick={(e) => handleCheckClick(e)}
             />
             <Title isCompleted={isCompleted}>{props.todo.description}</Title>

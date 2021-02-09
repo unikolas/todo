@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Styled from 'styled-components'
 import Todo from './Todo'
 
@@ -13,6 +13,7 @@ const StyledList = Styled.div`
 
 const ListTodos = (props) => {
     const todos = props.todos
+    const [isChecking, setChecking] = useState(false)
 
     useEffect(() => {
         props.getTodos()
@@ -24,8 +25,10 @@ const ListTodos = (props) => {
     }
 
     const handleCheckClick = async (todo) => {
+        setChecking(true)
         await todoMeth.updateStatus(todo)
-        props.getTodos()
+        await props.getTodos()
+        setChecking(false)
     }
 
     // <EditTodo todo={todo} />
@@ -37,6 +40,7 @@ const ListTodos = (props) => {
                 todo={todo}
                 onDelete={() => handleDeleteClick(todo)}
                 onCheck={() => handleCheckClick(todo)}
+                isChecking={isChecking}
             />
         )
     })

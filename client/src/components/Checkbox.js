@@ -1,7 +1,5 @@
-import { useState } from 'react'
 import { motion } from 'framer-motion'
-import Styled, { css } from 'styled-components'
-import media from '../helpers/media'
+import Styled from 'styled-components'
 
 import colors from '../constants/colors'
 import Icon from './Icon'
@@ -24,6 +22,12 @@ const Check = Styled(motion.div)`
     height: 20px;
     border-radius: 5px;
     border: 3px solid ${colors.grey95};
+    ${(props) =>
+        props.isChecked &&
+        `
+        border: 0;
+        background: ${colors.grey90};
+    `}
 `
 
 const Checkbox = (props) => {
@@ -42,7 +46,7 @@ const Checkbox = (props) => {
 
     return (
         <CheckContainer m={props.m} onClick={(e) => handleClick(e)}>
-            <Check>
+            <Check isChecked={props.isChecked}>
                 {props.isChecked && (
                     <Icon name='check' size={'xs'} color={colors.white} />
                 )}
