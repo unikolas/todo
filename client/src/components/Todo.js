@@ -1,22 +1,64 @@
 import React, { useState } from 'react'
-import Styled from 'styled-components'
+import Styled, { css } from 'styled-components'
+import { motion } from 'framer-motion'
 
 import ui from '../constants/constants'
 import font from '../constants/typography'
 import colors from '../constants/colors'
 import elevation from '../constants/elevation'
+import media from '../helpers/media'
+
 import todoConst from '../constants/todoConst'
+import todo from '../methods/todoMeth'
 
 import Icon from './Icon'
 import Checkbox from './Checkbox'
-import todo from '../methods/todoMeth'
+
+const StyledTodo = Styled(motion.div)`
+    display: flex;
+    cursor: pointer;
+    ${font.text.primary};
+    background: ${(props) =>
+        props.isCompleted ? colors.grey100 : colors.white};
+    border-radius: ${ui.radius.md};
+    padding: 12px 12px;
+    margin-bottom: 8px;
+    vertical-align: top;
+    z-index: 1;
+    ${media.md(css`
+        :hover {
+            z-index: 2;
+            ${(props) =>
+                props.isCompleted ? elevation('e100') : elevation('e600')}
+        }
+    `)}
+`
+
+const Delete = Styled(Icon)`
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin: auto 0 auto auto;
+    ${media.md(css`
+        :hover {
+            color: ${colors.error};
+        }
+    `)}
+`
+
+const Title = Styled.span`
+    flexGrow: 1;
+    ${(props) =>
+        props.isCompleted && {
+            textDecoration: 'line-through',
+            color: colors.grey80,
+        }}
+`
 
 const Todo = (props) => {
     const [isHovered, setHovered] = useState(false)
     const isCompleted =
         props.todo.status === todoConst.status.completed ? true : false
-
-    // Handlers
 
     const handleTodoClick = (e) => {
         console.log('handle Todo Click')
@@ -34,81 +76,28 @@ const Todo = (props) => {
         props.onDelete()
     }
 
-    // Styles
-
-    const titleStyles = {
-        default: {
-            flexGrow: 1,
-        },
-        completed: {
-            textDecoration: 'line-through',
-            color: colors.grey80,
-        },
-    }
-
-    const deleteButtonStyles = {
-        cursor: 'pointer',
-        marginLeft: 'auto',
-        padding: '2px 0',
-        opacity: isHovered ? 1 : 0,
-    }
-
-    // Return
-
     return (
-        <div
-            className={props.className}
-            style={{ display: 'flex' }}
+        <StyledTodo
+            isCompleted={isCompleted}
+            onClick={(e) => handleTodoClick(e)}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
-            onClick={(e) => handleTodoClick(e)}
         >
             <Checkbox
+                isChecked={isCompleted}
                 m={'2px 10px 2px 0'}
-                isChecked={isCompleted ? true : false}
                 isParentHovered={isHovered}
                 onClick={(e) => handleCheckClick(e)}
             />
-            <span
-                style={
-                    titleStyles.default &&
-                    (isCompleted ? titleStyles.completed : null)
-                }
-            >
-                {props.todo.description}
-            </span>
-            <Icon
+            <Title isCompleted={isCompleted}>{props.todo.description}</Title>
+            <Delete
                 name='delete'
                 size={'sm'}
                 color={colors.grey90}
-                style={deleteButtonStyles}
                 onClick={(e) => handleDeleteClick(e)}
             />
-        </div>
+        </StyledTodo>
     )
 }
 
-const StyledTodo = Styled(Todo)`
-    display: flex;
-    cursor: pointer;
-    width: ${(props) => props.w || '100%'};
-    ${font.text.primary};
-    background: ${(props) =>
-        props.todo.status === 'completed' ? colors.grey100 : colors.white};
-    border-radius: ${ui.radius.md};
-    padding: 12px 12px;
-    margin-bottom: 8px;
-    vertical-align: top;
-    z-index: 1;
-    ${elevation('e0')}
-    
-    @media (min-width: 640px) {
-        :hover{
-            z-index: 2;
-            ${elevation('e600')}
-        }
-    }
-    
-`
-
-export default StyledTodo
+export default Todo

@@ -1,21 +1,27 @@
-import React, { Fragment } from 'react'
+import React, { useState } from 'react'
 import InputTodo from './components/InputTodo'
 import ListTodos from './components/ListTodos'
 import Wrapper from './components/Wrapper'
 import Header from './components/Header'
 import colors from './constants/colors'
+import todoMeth from './methods/todoMeth'
 
-function App() {
+const App = () => {
+    const [todos, setTodos] = useState([])
+
+    const getTodos = async () => {
+        const todos = await todoMeth.getAll()
+        setTodos(todos)
+    }
+
     return (
-        <Fragment>
-            <Wrapper>
-                <Header color={colors.grey35}>Todo</Header>
-                <Wrapper variant='main'>
-                    <InputTodo />
-                    <ListTodos />
-                </Wrapper>
+        <Wrapper>
+            <Header color={colors.grey35}>Todo</Header>
+            <Wrapper variant='main'>
+                <InputTodo getTodos={() => getTodos()} />
+                <ListTodos getTodos={() => getTodos()} todos={todos} />
             </Wrapper>
-        </Fragment>
+        </Wrapper>
     )
 }
 

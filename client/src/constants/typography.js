@@ -7,7 +7,7 @@ const FONTS = {
 
 const DEFAULT_TEXT_STYLE = {
     fontFamily: FONTS.DEFAULT_FONT,
-    fontWeight: 400,
+    fontWeight: 500,
     fontSize: '17px',
     lineHeight: '24px',
     letterSpacing: '0',
@@ -37,19 +37,18 @@ const typography = {
         h1: css`
             font-family: ${FONTS.HEADING_FONT};
             font-weight: 800;
-            font-size: 43px;
-            line-height: 52px;
+            font-size: 35px;
+            line-height: 44px;
+
             letter-spacing: -0.025em;
 
+            @media (min-width: 399px) {
+                font-size: 43px;
+                line-height: 52px;
+            }
             @media (min-width: 1920px) {
-                /* XLarge desktop - MED */
                 font-size: 47px;
                 line-height: 62px;
-            }
-            @media (max-width: 399px) {
-                /* Mobile - HIGH */
-                font-size: 35px;
-                line-height: 44px;
             }
         `,
         h2: css`
@@ -59,15 +58,16 @@ const typography = {
             line-height: 44px;
             letter-spacing: -0.025em;
 
-            @media (min-width: 1920px) {
-                /* XLarge desktop - MED */
-                font-size: 41px;
-                line-height: 54px;
-            }
             @media (max-width: 399px) {
                 /* Mobile - HIGH */
                 font-size: 29px;
                 line-height: 38px;
+            }
+
+            @media (min-width: 1920px) {
+                /* XLarge desktop - MED */
+                font-size: 41px;
+                line-height: 54px;
             }
         `,
         h3: css`
@@ -77,15 +77,15 @@ const typography = {
             line-height: 38px;
             letter-spacing: -0.025em;
 
-            @media (min-width: 1920px) {
-                /* XLarge desktop - MED */
-                font-size: 33px;
-                line-height: 42px;
-            }
             @media (max-width: 399px) {
                 /* Mobile - HIGH */
                 font-size: 26px;
                 line-height: 33px;
+            }
+            @media (min-width: 1920px) {
+                /* XLarge desktop - MED */
+                font-size: 33px;
+                line-height: 42px;
             }
         `,
         h4: css`
@@ -94,15 +94,15 @@ const typography = {
             font-size: 21px;
             line-height: 28px;
             letter-spacing: -0.025em;
-            @media (min-width: 1920px) {
-                /* XLarge desktop - MED */
-                font-size: 23px;
-                line-height: 30px;
-            }
             @media (max-width: 399px) {
                 /* Mobile - HIGH */
                 font-size: 19px;
                 line-height: 24px;
+            }
+            @media (min-width: 1920px) {
+                /* XLarge desktop - MED */
+                font-size: 23px;
+                line-height: 30px;
             }
         `,
         h5: css`

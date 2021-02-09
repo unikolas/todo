@@ -1,11 +1,9 @@
 // Add material icons font to index.html
 // <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-import React from 'react'
+import Styled from 'styled-components'
 import { motion } from 'framer-motion'
-
 import colors from '../constants/colors'
-import animation from '../constants/animation'
 
 const size = {
     xxxs: 8,
@@ -20,29 +18,33 @@ const size = {
 }
 
 const defaultColor = colors.black
+
 const defaultSize = size.md
 
-const Icon = (props) => {
-    const style = {
-        WebkitTouchCallout: 'none' /* iOS Safari */,
-        WebkitUserSelect: 'none' /* Safari */,
-        KhtmlUserSelect: 'none' /* Konqueror HTML */,
-        MozUserSelect: 'none' /* Old versions of Firefox */,
-        msUserSelect: 'none' /* Internet Explorer/Edge */,
-        userSelect: 'none',
-        color: props.color || defaultColor,
-        fontSize: size[props.size] || defaultSize,
-        transition:
-            'color ' + animation.duration.sm + ' ' + animation.curve.cubic,
-        transition: 'all 0.15s ease-in',
-        ...props.style,
-    }
-
+const IconComponent = (props) => {
     return (
-        <motion.span {...props} className={'material-icons'} style={style}>
+        <motion.span
+            className={'material-icons ' + props.className}
+            onClick={props.onClick}
+        >
             {props.name}
         </motion.span>
     )
 }
+
+const Icon = Styled(IconComponent)`
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    ms-user-select: none;
+    user-select: none;
+    color: ${(props) => props.color || defaultColor};
+    font-size: ${(props) => (props.size ? size[props.size] : defaultSize)}px;
+    transition: 'all 0.15s ease-in';
+    :hover {
+        color: ${(props) => props.hoverColor}
+    }
+`
 
 export default Icon

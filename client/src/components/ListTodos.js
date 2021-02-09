@@ -1,30 +1,31 @@
-import React, { Fragment, useEffect, useState } from 'react'
-import EditTodo from './EditTodo'
+import React, { useEffect } from 'react'
+import Styled from 'styled-components'
 import Todo from './Todo'
+
+import EditTodo from './EditTodo'
 
 import todoMeth from '../methods/todoMeth'
 
-const ListTodos = () => {
-    const [todos, setTodos] = useState([])
+const StyledList = Styled.div`
+    display: flex;
+    flex-direction: column;
+`
 
-    const getTodos = async () => {
-        const todos = await todoMeth.getAll()
-        setTodos(todos)
-    }
+const ListTodos = (props) => {
+    const todos = props.todos
 
     useEffect(() => {
-        getTodos()
+        props.getTodos()
     }, [])
 
     const handleDeleteClick = (todo) => {
         todoMeth.delete(todo)
-        setTodos(todos.filter((item) => item.id !== todo.id))
+        props.getTodos()
     }
 
     const handleCheckClick = async (todo) => {
         await todoMeth.updateStatus(todo)
-        const todos = await todoMeth.getAll()
-        setTodos(todos)
+        props.getTodos()
     }
 
     // <EditTodo todo={todo} />
@@ -40,16 +41,7 @@ const ListTodos = () => {
         )
     })
 
-    return (
-        <div
-            style={{
-                display: 'flex',
-                flexDirection: 'column',
-            }}
-        >
-            {todoItems}
-        </div>
-    )
+    return <StyledList>{todoItems}</StyledList>
 }
 
 export default ListTodos

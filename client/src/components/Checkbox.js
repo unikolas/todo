@@ -1,8 +1,30 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { css } from 'styled-components'
+import Styled, { css } from 'styled-components'
+import media from '../helpers/media'
+
 import colors from '../constants/colors'
 import Icon from './Icon'
+
+const CheckContainer = Styled.div`
+    display: block;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: ${(props) => props.m && props.m};
+`
+
+const Check = Styled(motion.div)`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    border: 3px solid ${colors.grey95};
+`
 
 const Checkbox = (props) => {
     const handleClick = (e) => {
@@ -12,42 +34,6 @@ const Checkbox = (props) => {
             : alert('Pass onCheck function to Checkbox')
     }
 
-    const checkStyles = {
-        display: 'flex',
-        width: '100%',
-        height: '100%',
-        borderRadius: 5,
-        border: `3px solid ${colors.grey95}`,
-    }
-
-    const checkStylesHover = {
-        background: '#ccc',
-    }
-
-    const checkContainerStyles = {
-        display: 'block',
-        width: '20px',
-        height: '20px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        margin: props.m ? props.m : '2px 8px 0 0',
-    }
-
-    const variants = {
-        initial: {
-            width: 4,
-            height: 4,
-        },
-        empty: {
-            width: 18,
-            height: 18,
-        },
-        emptyHover: { borderColor: colors.grey80 },
-        checked: { borderWidth: 0, backgroundColor: colors.primary },
-        // checkedHover: { color: colors.primary, border: 8, scale: 1.1 },
-    }
-
     const spring = {
         type: 'spring',
         stiffness: 400,
@@ -55,22 +41,13 @@ const Checkbox = (props) => {
     }
 
     return (
-        <div style={checkContainerStyles}>
-            <motion.div
-                style={checkStyles}
-                className={props.className}
-                variants={variants}
-                initial='initial'
-                whileHover='emptyHover'
-                animate={props.isParentHovered ? 'empty' : 'initial'}
-                transition={spring}
-                onClick={(e) => handleClick(e)}
-            >
+        <CheckContainer m={props.m} onClick={(e) => handleClick(e)}>
+            <Check>
                 {props.isChecked && (
                     <Icon name='check' size={'xs'} color={colors.white} />
                 )}
-            </motion.div>
-        </div>
+            </Check>
+        </CheckContainer>
     )
 }
 

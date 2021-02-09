@@ -1,7 +1,7 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import Input from './Input'
 
-const InputTodo = () => {
+const InputTodo = (props) => {
     const [description, setDescription] = useState('')
 
     const handleChange = (e) => setDescription(e.target.value)
@@ -17,7 +17,7 @@ const InputTodo = () => {
                     body: JSON.stringify(body),
                 })
                 setDescription('')
-                window.location = '/'
+                props.getTodos()
             } catch (err) {
                 console.log(err.message)
             }
@@ -29,6 +29,7 @@ const InputTodo = () => {
             <form onSubmit={onSubmit}>
                 <Input
                     type='text'
+                    enterKeyHint='done'
                     value={description}
                     placeholder="What's on?"
                     style={{ marginBottom: 8 }}

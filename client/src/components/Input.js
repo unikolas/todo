@@ -3,7 +3,11 @@ import colors from '../constants/colors'
 import ui from '../constants/constants'
 import font from '../constants/typography'
 
-const Input = styled.input`
+const InputComponent = (props) => {
+    return <input {...props} className={props.className} />
+}
+
+const Input = styled(InputComponent)`
     ${font.text.primary};
     display: block;
     width: ${(props) => props.w || '100%'};
