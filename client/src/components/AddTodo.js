@@ -113,7 +113,7 @@ const AddTodo = (props) => {
         active: { marginTop: 24 },
     }
     const animationInput = {
-        initial: { opacity: 0, top: -32 },
+        initial: { opacity: 0, top: -24 },
         active: { opacity: 1, top: 0 },
     }
 
