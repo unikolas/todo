@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Styled, { css } from 'styled-components'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 import ui from '../constants/ui'
 import font from '../constants/typography'
@@ -16,6 +16,7 @@ import Checkbox from './Checkbox'
 const StyledTodo = Styled(motion.div)`
     display: flex;
     cursor: pointer;
+    user-select: none;
     ${font.text.primary};
     background: ${(props) =>
         props.isCompleted ? 'transparent' : colors.white};
@@ -23,8 +24,8 @@ const StyledTodo = Styled(motion.div)`
     padding: 12px 12px;
     margin-bottom: 8px;
     vertical-align: top;
-    z-index: 1;
     opacity: ${(props) => (props.isChecking ? 0.8 : 1)};
+    z-index: 1;
     ${breakpoint.md(css`
         :hover {
             z-index: 2;
@@ -83,6 +84,11 @@ const Todo = (props) => {
             onClick={(e) => handleTodoClick(e)}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
+            layout
+            initial={{ y: -48 }}
+            animate={{ y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ type: 'spring', damping: 50, stiffness: 500 }}
         >
             <Checkbox
                 m={'2px 10px 2px 0'}

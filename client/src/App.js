@@ -3,7 +3,7 @@ import Wrapper from './components/Wrapper'
 import Avatar from './components/Avatar'
 import ListTodos from './components/ListTodos'
 import AddTodo from './components/AddTodo'
-import AddTodoNew from './components/AddTodo'
+import Button from './components/Button'
 
 import todoMeth from './methods/todoMeth'
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { motion, AnimateSharedLayout, AnimatePresence } from 'framer-motion'
 import Styled from 'styled-components'
 import Todo from './Todo'
 
@@ -6,7 +7,7 @@ import EditTodo from './EditTodo'
 
 import todoMeth from '../methods/todoMeth'
 
-const StyledList = Styled.div`
+const StyledList = Styled(AnimateSharedLayout)`
     position: relative;
     display: flex;
     flex-direction: column;
@@ -43,11 +44,16 @@ const ListTodos = (props) => {
                 onDelete={() => handleDeleteClick(todo)}
                 onCheck={() => handleCheckClick(todo)}
                 isChecking={isChecking}
+                // layout
             />
         )
     })
 
-    return <StyledList>{todoItems}</StyledList>
+    return (
+        <AnimatePresence>
+            <StyledList>{todoItems}</StyledList>
+        </AnimatePresence>
+    )
 }
 
 export default ListTodos

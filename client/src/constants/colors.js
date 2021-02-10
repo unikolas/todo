@@ -2,11 +2,11 @@ const colors = {
     black: '#15171A',
     white: '#FFFFFF',
 
-    primary: '#0666EB',
+    primary: '#F7930D',
     acccent: '#E950A4',
 
     error: '#F54C3E',
-    warning: '#F7930D',
+    warning: '#F7930D', // to update
     success: '#23A423',
 
     grey35: '#525C66',

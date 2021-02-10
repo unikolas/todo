@@ -10,27 +10,17 @@ import breakpoint from '../helpers/breakpoints'
 
 import Input from './Input'
 import Checkbox from './Checkbox'
+import Button from './Button'
 
-const AddButton = Styled(motion.div)`
-    display: flex;
-    align-items: center;
-    position: fixed;
+const AddButton = Styled(Button)`
     z-index: 10;
-    cursor: pointer;
-    
-    color: ${colors.white};
-    ${font.text.primary};
-    font-weight: 500;
-    background: ${colors.warning};
-    border-radius: ${ui.radius.md};
-    
-    padding: 12px 20px;
-    min-height: 44px;
+    position: fixed;
     bottom: 32px;
     left: 50%;
+    ${elevation('e600')}
+
     transform: translateX(-50%) ${(props) =>
         props.isActive ? 'translateY(250%)' : null};
-    ${(props) => (props.isActive ? elevation('e0') : elevation('e600'))}
     transition: transform 150ms cubic-bezier(.25,.75,.5,1);
 
     ${breakpoint.sm(
@@ -124,7 +114,11 @@ const AddTodo = (props) => {
             animate={isActive ? 'active' : 'initial'}
             transition={{ type: 'spring', damping: 40, stiffness: 300 }}
         >
-            <AddButton isActive={isActive} onClick={(e) => handleAddClick(e)}>
+            <AddButton
+                size={'lg'}
+                isActive={isActive}
+                onClick={(e) => handleAddClick(e)}
+            >
                 Add todo
             </AddButton>
 
