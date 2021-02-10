@@ -93,7 +93,7 @@ const Todo = (props) => {
             <Delete
                 name='delete'
                 size={'sm'}
-                color={colors.grey90}
+                color={colors.grey95}
                 onClick={(e) => handleDeleteClick(e)}
             />
         </StyledTodo>

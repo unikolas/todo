@@ -18,7 +18,7 @@ const Input = styled(InputComponent)`
     outline: none;
     transition: all 0.15s ease-in;
     ::placeholder {
-        color: ${colors.grey50};
+        color: ${colors.grey80};
     }
     :focus {
         background-color: white;

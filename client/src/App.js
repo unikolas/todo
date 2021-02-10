@@ -3,7 +3,7 @@ import Wrapper from './components/Wrapper'
 import Avatar from './components/Avatar'
 import ListTodos from './components/ListTodos'
 import AddTodo from './components/AddTodo'
-import AddTodoNew from './components/AddTodoNew'
+import AddTodoNew from './components/AddTodo'
 
 import todoMeth from './methods/todoMeth'
 
@@ -26,8 +26,7 @@ const App = () => {
                 image={'/assets/logo/logo-transparent.svg'}
             />
             <Wrapper variant='main'>
-                {/* <AddTodo getTodos={() => getTodos()} /> */}
-                <AddTodoNew getTodos={() => getTodos()} />
+                <AddTodo getTodos={() => getTodos()} />
                 <ListTodos getTodos={() => getTodos()} todos={todos} />
             </Wrapper>
         </Wrapper>
