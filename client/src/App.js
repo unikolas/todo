@@ -23,7 +23,7 @@ const App = () => {
                     backgroundColor: 'transparent',
                 }}
                 size={'sm'}
-                image={'/assets/logo/logo-transparent.svg'}
+                image={'/assets/logo/logo-transparent-grey.svg'}
             />
             <Wrapper variant='main'>
                 <AddTodo getTodos={() => getTodos()} />
