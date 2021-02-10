@@ -7,6 +7,7 @@ import EditTodo from './EditTodo'
 import todoMeth from '../methods/todoMeth'
 
 const StyledList = Styled.div`
+    position: relative;
     display: flex;
     flex-direction: column;
 `

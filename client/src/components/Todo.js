@@ -2,14 +2,13 @@ import React, { useState } from 'react'
 import Styled, { css } from 'styled-components'
 import { motion } from 'framer-motion'
 
-import ui from '../constants/constants'
+import ui from '../constants/ui'
 import font from '../constants/typography'
 import colors from '../constants/colors'
 import elevation from '../constants/elevation'
-import media from '../helpers/media'
+import breakpoint from '../helpers/breakpoints'
 
 import todoConst from '../constants/todoConst'
-import todo from '../methods/todoMeth'
 
 import Icon from './Icon'
 import Checkbox from './Checkbox'
@@ -26,7 +25,7 @@ const StyledTodo = Styled(motion.div)`
     vertical-align: top;
     z-index: 1;
     opacity: ${(props) => (props.isChecking ? 0.8 : 1)};
-    ${media.md(css`
+    ${breakpoint.md(css`
         :hover {
             z-index: 2;
             ${(props) =>
@@ -40,7 +39,7 @@ const Delete = Styled(Icon)`
     width: 20px;
     height: 20px;
     margin: auto 0 auto auto;
-    ${media.md(css`
+    ${breakpoint.md(css`
         :hover {
             color: ${colors.error};
         }

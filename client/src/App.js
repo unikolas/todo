@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import AddTodo from './components/AddTodo'
-import ListTodos from './components/ListTodos'
 import Wrapper from './components/Wrapper'
-import Header from './components/Header'
-import colors from './constants/colors'
+import Avatar from './components/Avatar'
+import ListTodos from './components/ListTodos'
+import AddTodo from './components/AddTodo'
+import AddTodoNew from './components/AddTodoNew'
+
 import todoMeth from './methods/todoMeth'
 
 const App = () => {
@@ -16,9 +17,17 @@ const App = () => {
 
     return (
         <Wrapper>
-            <Header color={colors.grey35}>Todo</Header>
+            <Avatar
+                style={{
+                    margin: '0 16px 24px 2px',
+                    backgroundColor: 'transparent',
+                }}
+                size={'sm'}
+                image={'/assets/logo/logo-transparent.svg'}
+            />
             <Wrapper variant='main'>
-                <AddTodo getTodos={() => getTodos()} />
+                {/* <AddTodo getTodos={() => getTodos()} /> */}
+                <AddTodoNew getTodos={() => getTodos()} />
                 <ListTodos getTodos={() => getTodos()} todos={todos} />
             </Wrapper>
         </Wrapper>
