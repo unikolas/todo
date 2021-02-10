@@ -12,23 +12,33 @@ import Input from './Input'
 import Checkbox from './Checkbox'
 
 const AddButton = Styled(motion.div)`
-    position: fixed;
     display: flex;
     align-items: center;
-    bottom: 24px;
+    position: fixed;
+    z-index: 10;
     cursor: pointer;
-    background: #ccc;
+    
+    color: ${colors.white};
     ${font.text.primary};
+    font-size: 15px;
+    font-weight: 500;
+    background: ${colors.warning};
     border-radius: ${ui.radius.md};
-    min-height: 48px;
-    background: ${colors.white};
-    border-radius: ${ui.radius.md};
-    padding: 4px 16px;
+    
+    padding: 0px 16px;
+    min-height: 44px;
+    bottom: 24px;
     left: 50%;
     transform: translateX(-50%) ${(props) =>
-        props.isActive ? 'translateY(200%)' : null};
+        props.isActive ? 'translateY(250%)' : null};
     ${(props) => (props.isActive ? elevation('e0') : elevation('e600'))}
-    transition: transform 100ms ease-in;
+    transition: transform 150ms cubic-bezier(.25,.75,.5,1);
+
+    ${breakpoint.sm(
+        css`
+            bottom: 56px;
+        `
+    )}
 `
 
 const StyledAddTodo = Styled(motion.div)`
@@ -68,6 +78,7 @@ const AddTodo = (props) => {
     }
 
     const handleCheckClick = (e) => {
+        input.current.focus()
         setIsCompleted(!isCompleted)
     }
 
@@ -75,15 +86,15 @@ const AddTodo = (props) => {
         input.current.focus()
     }
 
-    const handleFocus = () => {
-        setIsActive(!isActive)
-    }
-
     const onSubmit = async (e) => {
         e.preventDefault()
         if (title !== '') {
             try {
-                const body = { title: title, description: title }
+                const body = {
+                    title: title,
+                    description: title,
+                    status: isCompleted ? 'completed' : 'todo',
+                }
                 await fetch('/api/todos', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -91,6 +102,7 @@ const AddTodo = (props) => {
                 })
                 setTitle('')
                 props.getTodos()
+                setIsCompleted(false)
             } catch (err) {
                 console.log(err.message)
             }

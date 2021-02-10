@@ -1,13 +1,13 @@
 const colors = {
     black: '#15171A',
-    white: '#FFFFFF', 
+    white: '#FFFFFF',
 
     primary: '#0666EB',
     acccent: '#E950A4',
 
     error: '#F54C3E',
-    warning: '#23A423',
-    success: '#F7930D',
+    warning: '#F7930D',
+    success: '#23A423',
 
     grey35: '#525C66',
     grey50: '#828B94',
