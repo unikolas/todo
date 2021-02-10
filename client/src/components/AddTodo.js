@@ -108,13 +108,13 @@ const AddTodo = (props) => {
         }
     }
 
-    const animationInput = {
-        initial: { opacity: 0 },
-        active: { opacity: 1 },
-    }
     const animationContainer = {
         initial: { marginTop: -48 },
         active: { marginTop: 24 },
+    }
+    const animationInput = {
+        initial: { opacity: 0, top: -32 },
+        active: { opacity: 1, top: 0 },
     }
 
     return (
@@ -125,7 +125,7 @@ const AddTodo = (props) => {
             transition={{ type: 'spring', damping: 40, stiffness: 300 }}
         >
             <AddButton isActive={isActive} onClick={(e) => handleAddClick(e)}>
-                Add a todo
+                Add todo
             </AddButton>
 
             <StyledAddTodo
