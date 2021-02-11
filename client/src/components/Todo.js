@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import Styled, { css } from 'styled-components'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 import ui from '../constants/ui'
 import font from '../constants/typography'
 import colors from '../constants/colors'
+import animation from '../constants/animation'
 import elevation from '../constants/elevation'
 import breakpoint from '../helpers/breakpoints'
 
@@ -85,10 +86,9 @@ const Todo = (props) => {
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             layout
-            initial={{ y: -48 }}
+            initial={{ y: -40 }}
             animate={{ y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ type: 'spring', damping: 50, stiffness: 500 }}
+            transition={animation.spring.default}
         >
             <Checkbox
                 m={'2px 10px 2px 0'}

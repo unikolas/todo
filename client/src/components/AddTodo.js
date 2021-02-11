@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import ui from '../constants/ui'
 import colors from '../constants/colors'
 import font from '../constants/typography'
+import animation from '../constants/animation'
 import elevation from '../constants/elevation'
 import breakpoint from '../helpers/breakpoints'
 
@@ -100,7 +101,7 @@ const AddTodo = (props) => {
 
     const animationContainer = {
         initial: { marginTop: -48 },
-        active: { marginTop: 24 },
+        active: { marginTop: 0 },
     }
     const animationInput = {
         initial: { opacity: 0, top: -24 },
@@ -112,7 +113,7 @@ const AddTodo = (props) => {
             variants={animationContainer}
             initial='initial'
             animate={isActive ? 'active' : 'initial'}
-            transition={{ type: 'spring', damping: 40, stiffness: 300 }}
+            transition={animation.spring.slow}
         >
             <AddButton
                 size={'lg'}
@@ -126,7 +127,7 @@ const AddTodo = (props) => {
                 variants={animationInput}
                 initial='initial'
                 animate={isActive ? 'active' : 'initial'}
-                transition={{ type: 'spring', damping: 50, stiffness: 500 }}
+                transition={animation.spring.default}
             >
                 <Checkbox
                     m={'6px 10px 2px 0'}
