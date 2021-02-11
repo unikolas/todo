@@ -7,7 +7,6 @@ import EditTodo from './EditTodo'
 
 import todoMeth from '../methods/todoMeth'
 
-// const StyledList = Styled(AnimateSharedLayout)`
 const StyledList = Styled(motion.div)`
     position: relative;
     display: flex;
@@ -18,9 +17,11 @@ const ListTodos = (props) => {
     const todos = props.todos
     const getTodos = props.getTodos
     const [isChecking, setIsChecking] = useState(false)
+    const [animateTodos, setAnimateTodos] = useState(false)
 
-    useEffect(() => {
-        getTodos()
+    useEffect(async () => {
+        await getTodos()
+        setAnimateTodos(true)
     }, [])
 
     const handleDeleteClick = async (todo) => {
@@ -45,15 +46,12 @@ const ListTodos = (props) => {
                 onDelete={() => handleDeleteClick(todo)}
                 onCheck={() => handleCheckClick(todo)}
                 isChecking={isChecking}
+                initial={animateTodos}
             />
         )
     })
 
-    return (
-        <AnimatePresence initial={false}>
-            <StyledList>{todoItems}</StyledList>
-        </AnimatePresence>
-    )
+    return <StyledList>{todoItems}</StyledList>
 }
 
 export default ListTodos

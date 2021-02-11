@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Styled, { css } from 'styled-components'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 import ui from '../constants/ui'
 import font from '../constants/typography'
@@ -26,14 +26,6 @@ const StyledTodo = Styled(motion.div)`
     margin-bottom: 8px;
     vertical-align: top;
     opacity: ${(props) => (props.isChecking ? 0.8 : 1)};
-    z-index: 1;
-    ${breakpoint.md(css`
-        :hover {
-            z-index: 2;
-            ${(props) =>
-                props.isCompleted ? elevation('e100') : elevation('e600')}
-        }
-    `)}
 `
 
 const Delete = Styled(Icon)`
@@ -58,7 +50,6 @@ const Title = Styled.span`
 `
 
 const Todo = (props) => {
-    const [isHovered, setHovered] = useState(false)
     const isCompleted =
         props.todo.status === todoConst.status.completed ? true : false
 
@@ -79,30 +70,32 @@ const Todo = (props) => {
     }
 
     return (
-        <StyledTodo
-            isCompleted={isCompleted}
-            isChecking={props.isChecking}
-            onClick={(e) => handleTodoClick(e)}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-            layout
-            initial={{ y: -40 }}
-            animate={{ y: 0 }}
-            transition={animation.spring.default}
-        >
-            <Checkbox
-                m={'2px 10px 2px 0'}
-                isChecked={isCompleted}
-                onClick={(e) => handleCheckClick(e)}
-            />
-            <Title isCompleted={isCompleted}>{props.todo.description}</Title>
-            <Delete
-                name='delete'
-                size={'sm'}
-                color={colors.grey95}
-                onClick={(e) => handleDeleteClick(e)}
-            />
-        </StyledTodo>
+        <AnimatePresence initial={props.initial ? props.initial : false}>
+            <StyledTodo
+                isCompleted={isCompleted}
+                isChecking={props.isChecking}
+                onClick={(e) => handleTodoClick(e)}
+                layout
+                initial={{ y: -40 }}
+                animate={{ y: 0 }}
+                transition={animation.spring.default}
+            >
+                <Checkbox
+                    m={'2px 10px 2px 0'}
+                    isChecked={isCompleted}
+                    onClick={(e) => handleCheckClick(e)}
+                />
+                <Title isCompleted={isCompleted}>
+                    {props.todo.description}
+                </Title>
+                <Delete
+                    name='delete'
+                    size={'sm'}
+                    color={colors.grey95}
+                    onClick={(e) => handleDeleteClick(e)}
+                />
+            </StyledTodo>
+        </AnimatePresence>
     )
 }
 
