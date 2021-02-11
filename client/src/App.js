@@ -50,7 +50,6 @@ const App = () => {
     }
 
     const keyPressHandler = (e) => {
-        console.log(e.keyCode)
         if (e.keyCode === 9) {
             e.preventDefault()
             setIsActive(!isActive)
