@@ -46,7 +46,7 @@ const ListTodos = (props) => {
                 onDelete={() => handleDeleteClick(todo)}
                 onCheck={() => handleCheckClick(todo)}
                 isChecking={isChecking}
-                initial={animateTodos}
+                animatePresence={animateTodos}
             />
         )
     })

@@ -70,7 +70,9 @@ const Todo = (props) => {
     }
 
     return (
-        <AnimatePresence initial={props.initial ? props.initial : false}>
+        <AnimatePresence
+            initial={props.animatePresence ? props.animatePresence : false}
+        >
             <StyledTodo
                 isCompleted={isCompleted}
                 isChecking={props.isChecking}

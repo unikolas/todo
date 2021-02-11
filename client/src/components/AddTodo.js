@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react'
-import Styled, { css } from 'styled-components'
+import React, { useState, useEffect, useRef } from 'react'
+import Styled from 'styled-components'
 import { motion } from 'framer-motion'
 
 import ui from '../constants/ui'
@@ -7,72 +7,33 @@ import colors from '../constants/colors'
 import font from '../constants/typography'
 import animation from '../constants/animation'
 import elevation from '../constants/elevation'
-import breakpoint from '../helpers/breakpoints'
 
 import Input from './Input'
 import Checkbox from './Checkbox'
-import Button from './Button'
 
-const AddButton = Styled(Button)`
-    z-index: 10;
-    position: fixed;
-    bottom: 32px;
-    left: 50%;
-    ${elevation('e600')}
-
-    transform: translateX(-50%) ${(props) =>
-        props.isActive ? 'translateY(250%)' : null};
-    transition: transform 150ms cubic-bezier(.25,.75,.5,1);
-
-    ${breakpoint.sm(
-        css`
-            bottom: 56px;
-        `
-    )}
-`
-
-const StyledAddTodo = Styled(motion.div)`
-    z-index: 2;
-    position: relative;
-    display: flex;
-    width: 100%;
-    min-height: 48px;
-    cursor: pointer;
-    ${font.text.primary};
-    background: ${(props) =>
-        props.isCompleted ? 'transparent' : colors.white};
-    border-radius: ${ui.radius.md};
-    padding: 8px 12px;
-    margin-bottom: 8px;
-    vertical-align: top;
-    opacity: ${(props) => (props.isChecking ? 0.8 : 1)};
-    ${elevation('e600')}
-    ${breakpoint.md(css`
-        :hover {
-            z-index: 2;
-            ${(props) =>
-                props.isCompleted ? elevation('e100') : elevation('e600')}
-        }
-    `)}
-`
-
-const AddTodo = (props) => {
+const AddTodoComponent = (props) => {
     const [title, setTitle] = useState('')
     const [isCompleted, setIsCompleted] = useState(false)
-    const [isActive, setIsActive] = useState(false)
-
     const input = useRef(null)
+
+    useEffect(() => {
+        if (props.isActive) {
+            input.current.focus()
+        }
+    }, [props.isActive])
+
+    const inputKeyDownHandler = ({ key }) => {
+        if (key === 'Escape') {
+            input.current.blur()
+        }
+    }
 
     function handleChange(e) {
         setTitle(e.target.value)
     }
 
     const handleCheckClick = (e) => {
-        input.current.focus()
         setIsCompleted(!isCompleted)
-    }
-
-    const handleAddClick = (e) => {
         input.current.focus()
     }
 
@@ -99,34 +60,18 @@ const AddTodo = (props) => {
         }
     }
 
-    const animationContainer = {
-        initial: { marginTop: -48 },
-        active: { marginTop: 0 },
-    }
-    const animationInput = {
-        initial: { opacity: 0, top: -24 },
-        active: { opacity: 1, top: 0 },
-    }
-
     return (
         <motion.div
-            variants={animationContainer}
+            variants={props.containerAnimation}
             initial='initial'
-            animate={isActive ? 'active' : 'initial'}
+            animate={props.isActive ? 'active' : 'initial'}
             transition={animation.spring.slow}
         >
-            <AddButton
-                size={'lg'}
-                isActive={isActive}
-                onClick={(e) => handleAddClick(e)}
-            >
-                Add todo
-            </AddButton>
-
-            <StyledAddTodo
-                variants={animationInput}
+            <motion.div
+                className={props.className}
+                variants={props.contentAnimation}
                 initial='initial'
-                animate={isActive ? 'active' : 'initial'}
+                animate={props.isActive ? 'active' : 'initial'}
                 transition={animation.spring.default}
             >
                 <Checkbox
@@ -139,22 +84,41 @@ const AddTodo = (props) => {
                     <Input
                         type='text'
                         enterKeyHint='done'
-                        value={title}
                         placeholder="What's next?"
+                        value={title}
                         h={'100%'}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                         onBlur={() => {
-                            setIsActive(false)
+                            props.onBlur()
                         }}
                         onFocus={() => {
-                            setIsActive(true)
+                            props.onFocus()
                         }}
+                        onKeyDown={(e) => inputKeyDownHandler(e)}
                         ref={input}
                     />
                 </form>
-            </StyledAddTodo>
+            </motion.div>
         </motion.div>
     )
 }
+
+const AddTodo = Styled(AddTodoComponent)`
+    display: flex;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    width: 100%;
+    min-height: 48px;
+    vertical-align: top;
+    ${font.text.primary};
+    background: ${(props) =>
+        props.isCompleted ? 'transparent' : colors.white};
+    border-radius: ${ui.radius.md};
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    opacity: ${(props) => (props.isChecking ? 0.8 : 1)};
+    ${elevation('e600')}
+`
 
 export default AddTodo

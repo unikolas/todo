@@ -23,9 +23,9 @@ const Avatar = Styled.div`
     display: block;
     width: ${(props) => (props.size ? sizes[props.size] : sizes.md)}px;
     height: ${(props) => (props.size ? sizes[props.size] : sizes.md)}px;
-    background-color: ${(props) => (props.color ? props.color : '#72849A')};
-    border-radius: ${(props) =>
-        props.radius ? radius[props.radius] : radius.sm};
+    background-color: ${(props) => (props.bc ? props.bc : '#72849A')};
+    margin: ${(props) => (props.m ? props.m : null)};
+    border-radius: ${(props) => (props.br ? radius[props.br] : radius.sm)};
     background-image: url(${(props) => props.image});
     background-size: cover;
 `
