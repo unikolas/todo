@@ -21,6 +21,8 @@ const variants = {
 const Wrapper = Styled.div`
     display: block;
     width: auto;
+    max-height: ${(props) => props.maxh};
+    min-height: ${(props) => props.minh};
     margin: 0 auto;
     background: ${(props) => props.bc};
     ${(props) => (props.variant === 'main' ? variants.main : variants.default)}

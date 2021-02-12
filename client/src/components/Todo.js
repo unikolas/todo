@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Styled, { css } from 'styled-components'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useMotionValue } from 'framer-motion'
 
 import ui from '../constants/ui'
 import font from '../constants/typography'
@@ -42,6 +42,9 @@ const Delete = Styled(Icon)`
 
 const Title = Styled.span`
     flexGrow: 1;
+    word-wrap: break-word;
+    min-width: 30%;
+    padding-right: 8px;
     ${(props) =>
         props.isCompleted && {
             textDecoration: 'line-through',
@@ -81,11 +84,17 @@ const Todo = (props) => {
                 initial={{ y: -40 }}
                 animate={{ y: 0 }}
                 transition={animation.spring.default}
+                //
+                drag='y'
+                dragOriginY={null}
+                dragConstraints={{ top: 0, bottom: 0 }}
+                dragElastic={1}
             >
                 <Checkbox
                     m={'2px 10px 2px 0'}
                     isChecked={isCompleted}
-                    onClick={(e) => handleCheckClick(e)}
+                    onMouseDown={(e) => handleCheckClick(e)}
+                    // onClick={(e) => handleCheckClick(e)}
                 />
                 <Title isCompleted={isCompleted}>
                     {props.todo.description}

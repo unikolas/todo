@@ -33,9 +33,12 @@ const Check = Styled(motion.div)`
 const Checkbox = (props) => {
     const handleClick = (e) => {
         e.stopPropagation()
-        props.onClick
-            ? props.onClick(e)
-            : alert('Pass onCheck function to Checkbox')
+        if (props.onClick) {
+            props.onClick(e)
+        }
+        if (props.onMouseDown) {
+            props.onMouseDown(e)
+        }
     }
 
     const spring = {
