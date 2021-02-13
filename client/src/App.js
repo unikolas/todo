@@ -25,7 +25,7 @@ const App = () => {
                 image={'/assets/logo/logo-transparent-grey.svg'}
                 tabIndex={-1}
             />
-            <Wrapper variant='main'>
+            <Wrapper variant='main' p={'0 0 120px 0'}>
                 <AddTodo onTodoAdded={() => getTodos()} />
                 <ListTodos getTodos={() => getTodos()} todos={todos} />
             </Wrapper>
