@@ -14,7 +14,7 @@ import Checkbox from './Checkbox'
 import Button from './Button'
 
 const AddButton = Styled(Button)`
-    z-index: 10;
+    z-index: 40;
     position: fixed;
     bottom: 32px;
     left: 50%;

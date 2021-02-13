@@ -56,7 +56,30 @@ app.post('/api/todos', async (req, res) => {
 app.get('/api/todos', async (req, res) => {
     try {
         const allTodos = await pool.query(
-            'SELECT * FROM todo ORDER BY status desc, updated_date desc'
+            `
+            WITH 
+            todos as (
+                SELECT * FROM todo 
+                WHERE status = 'todo'
+                ORDER BY status, updated_date desc), 
+            completed as (
+                SELECT *
+                FROM todo 
+                WHERE status = 'completed' 
+                ORDER BY status, updated_date desc
+                LIMIT 3)
+            SELECT * FROM todos
+            UNION ALL
+            SELECT * FROM completed
+            `
+            // `as result(SELECT * FROM todo
+            // WHERE status = 'completed' LIMIT 3)
+            // UNION
+            // SELECT * FROM todo
+            // WHERE status = 'todo'
+            // LIMIT 3
+
+            // `
         )
         res.json(allTodos.rows)
     } catch (err) {

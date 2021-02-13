@@ -6,13 +6,14 @@ import ui from '../constants/ui'
 import font from '../constants/typography'
 import colors from '../constants/colors'
 import animation from '../constants/animation'
-import elevation from '../constants/elevation'
+
 import breakpoint from '../helpers/breakpoints'
 
 import todoConst from '../constants/todoConst'
 
 import Icon from './Icon'
 import Checkbox from './Checkbox'
+import elevation from '../constants/elevation'
 
 const StyledTodo = Styled(motion.div)`
     display: flex;
@@ -20,12 +21,14 @@ const StyledTodo = Styled(motion.div)`
     user-select: none;
     ${font.text.primary};
     background: ${(props) =>
-        props.isCompleted ? 'transparent' : colors.white};
+        props.isCompleted && !props.isDragging ? 'transparent' : colors.white};
     border-radius: ${ui.radius.md};
     padding: 12px 12px;
     margin-bottom: 8px;
     vertical-align: top;
     opacity: ${(props) => (props.isChecking ? 0.8 : 1)};
+    z-index: ${(props) => (props.isDragging ? 10 : 1)};
+    ${(props) => (props.isDragging ? elevation('e600') : null)}
 `
 
 const Delete = Styled(Icon)`
@@ -53,6 +56,8 @@ const Title = Styled.span`
 `
 
 const Todo = (props) => {
+    const [isDragging, setIsDragging] = useState(false)
+
     const isCompleted =
         props.todo.status === todoConst.status.completed ? true : false
 
@@ -85,10 +90,13 @@ const Todo = (props) => {
                 animate={{ y: 0 }}
                 transition={animation.spring.default}
                 //
+                isDragging={isDragging}
                 drag='y'
                 dragOriginY={null}
                 dragConstraints={{ top: 0, bottom: 0 }}
                 dragElastic={1}
+                onDragStart={() => setIsDragging(true)}
+                onDragEnd={() => setIsDragging(false)}
             >
                 <Checkbox
                     m={'2px 10px 2px 0'}
