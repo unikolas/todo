@@ -16,6 +16,9 @@ const App = () => {
         setTodos(todos)
     }
 
+    const mediaMatch = window.matchMedia('(min-width: 600px)').matches
+    const padding = mediaMatch ? '0 0 112px 0' : '0 0 80px 0'
+
     return (
         <Wrapper minh={'100vh'}>
             <Avatar
@@ -25,7 +28,7 @@ const App = () => {
                 image={'/assets/logo/logo-transparent-grey.svg'}
                 tabIndex={-1}
             />
-            <Wrapper variant='main' p={'0 0 120px 0'}>
+            <Wrapper variant='main' p={padding}>
                 <AddTodo onTodoAdded={() => getTodos()} />
                 <ListTodos getTodos={() => getTodos()} todos={todos} />
             </Wrapper>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { motion, AnimateSharedLayout, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Styled from 'styled-components'
 import Todo from './Todo'
 

@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import Styled, { css } from 'styled-components'
-import { motion, AnimatePresence, useMotionValue } from 'framer-motion'
+import {
+    motion,
+    AnimatePresence,
+    useDragControls,
+    useViewportScroll,
+} from 'framer-motion'
 
 import ui from '../constants/ui'
 import font from '../constants/typography'
 import colors from '../constants/colors'
 import animation from '../constants/animation'
-
 import breakpoint from '../helpers/breakpoints'
 
 import todoConst from '../constants/todoConst'
@@ -21,14 +25,14 @@ const StyledTodo = Styled(motion.div)`
     user-select: none;
     ${font.text.primary};
     background: ${(props) =>
-        props.isCompleted && !props.isDragging ? 'transparent' : colors.white};
+        props.isCompleted && !props.drag ? 'transparent' : colors.white};
     border-radius: ${ui.radius.md};
     padding: 12px 12px;
     margin-bottom: 8px;
     vertical-align: top;
     opacity: ${(props) => (props.isChecking ? 0.8 : 1)};
-    z-index: ${(props) => (props.isDragging ? 10 : 1)};
-    ${(props) => (props.isDragging ? elevation('e600') : null)}
+    z-index: ${(props) => (props.isDrag ? 10 : 1)};
+    ${(props) => (props.isDrag ? elevation('e600') : null)}
 `
 
 const Delete = Styled(Icon)`
@@ -56,13 +60,20 @@ const Title = Styled.span`
 `
 
 const Todo = (props) => {
-    const [isDragging, setIsDragging] = useState(false)
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches
+    const [isDrag, setDrag] = useState(false)
+    const dragControls = useDragControls()
+    const timerRef = useRef(0)
 
     const isCompleted =
         props.todo.status === todoConst.status.completed ? true : false
 
     const handleTodoClick = (e) => {
-        console.log('handle Todo Click')
+        if (isDrag) {
+            return
+        } else {
+            console.log('handle Todo Click')
+        }
     }
 
     const handleCheckClick = (e) => {
@@ -77,6 +88,33 @@ const Todo = (props) => {
         props.onDelete()
     }
 
+    function startDrag(e) {
+        if (isTouchDevice) {
+            // Touch device - Delayed drag start
+            timerRef.current = setTimeout(() => {
+                dragControls.start(e, { snapToCursor: true })
+                setDrag(true)
+                console.log(timerRef)
+            }, 600) // Feels close to iOS long tap timeout and haptic feedback. To investigate
+        } else {
+            // Non touch device - Instant drag start
+            timerRef.current = setTimeout(() => {
+                dragControls.start(e, { snapToCursor: true })
+                setDrag(true)
+                console.log(timerRef)
+            }, 100) // Preserve delay for a usual click before setting drag styles
+        }
+    }
+
+    function endDrag() {
+        console.log('cancel: ', timerRef)
+        clearTimeout(timerRef.current)
+        setDrag(false)
+        if (!isDrag) {
+            handleTodoClick()
+        }
+    }
+
     return (
         <AnimatePresence
             initial={props.animatePresence ? props.animatePresence : false}
@@ -84,25 +122,24 @@ const Todo = (props) => {
             <StyledTodo
                 isCompleted={isCompleted}
                 isChecking={props.isChecking}
-                onClick={(e) => handleTodoClick(e)}
                 layout
                 initial={{ y: -40 }}
                 animate={{ y: 0 }}
                 transition={animation.spring.default}
                 //
-                isDragging={isDragging}
-                drag='y'
+                drag={isDrag ? 'y' : false}
+                isDrag={isDrag}
+                dragControls={dragControls}
                 dragOriginY={null}
-                dragConstraints={{ top: 0, bottom: 0 }}
-                dragElastic={1}
-                onDragStart={() => setIsDragging(true)}
-                onDragEnd={() => setIsDragging(false)}
+                whileTap={!isDrag ? null : { scale: 1.05 }}
+                onPointerDown={startDrag}
+                onTap={endDrag}
+                onDragEnd={endDrag} // Handle cancel if pointer is outside an element
             >
                 <Checkbox
                     m={'2px 10px 2px 0'}
                     isChecked={isCompleted}
                     onMouseDown={(e) => handleCheckClick(e)}
-                    // onClick={(e) => handleCheckClick(e)}
                 />
                 <Title isCompleted={isCompleted}>
                     {props.todo.description}

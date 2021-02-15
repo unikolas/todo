@@ -72,14 +72,6 @@ app.get('/api/todos', async (req, res) => {
             UNION ALL
             SELECT * FROM completed
             `
-            // `as result(SELECT * FROM todo
-            // WHERE status = 'completed' LIMIT 3)
-            // UNION
-            // SELECT * FROM todo
-            // WHERE status = 'todo'
-            // LIMIT 3
-
-            // `
         )
         res.json(allTodos.rows)
     } catch (err) {
